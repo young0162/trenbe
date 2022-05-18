@@ -1,0 +1,29 @@
+.header_inner {
+    width: 100%;
+    max-width: 1920px;
+    padding: 0 48px;
+    box-sizing: border-box;
+    height: 100px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header_inner .header_flex {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_inner .header_flex .logo {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 3rem;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+}
+
+.header_inner .header_flex .login {
+    font-size: 3.5rem;
+    cursor: pointer;
+}

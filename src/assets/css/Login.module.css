@@ -1,0 +1,37 @@
+.container {
+    width: 335px;
+    margin: 0 auto;
+    margin-top: 48px;
+}
+
+.container .title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.container input {
+    height: 40px;
+    padding-left: 10px;
+    border: none;
+    background: rgb(249, 249, 249);
+    width: calc(100% - 80px);
+    display: -webkit-flex;
+}
+
+.container .id,
+.container .password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    height: 60px;
+}
+
+.container .id span,
+.container .password span {
+    width: 80px;
+    display: inline-block;
+}
+
