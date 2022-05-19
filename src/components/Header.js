@@ -1,17 +1,11 @@
 import React, {useEffect} from "react";
 import styles from "../assets/css/Header.module.css";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import axios from "axios";
 import {Link} from "react-router-dom";
 
 
 const Header = () => {
 
-    useEffect(() => {
-        // axios.get('http://3.39.198.214:8080/products')
-        //     .then((res) => { console.log('res' , res) })
-        //     .catch((error) => { console.log(error) })
-    }, [])
 
     return (
         <div className={styles.header_wrap}>

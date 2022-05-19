@@ -1,0 +1,66 @@
+.wrap {
+    min-height: 800px;
+}
+
+.container {
+    width: 350px;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.container > .title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.inputWrap {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    font-size: 1.4rem;
+}
+
+.inputWrap > .title {
+    width: 100px;
+    color: rgb(85, 85, 85);
+}
+
+.inputWrap .inputDiv {
+    width: calc(100% - 100px);
+}
+
+.inputWrap > .inputDiv input {
+    background: rgb(249, 249, 249);
+    border: none;
+    height: 40px;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.agreement {
+    border-top: 1px solid #ddd;
+    margin-top: 5rem;
+}
+
+.agreement span{
+    font-size: 1.4rem;
+}
+
+
+
+.signUpBtn button {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-top: 3rem;
+}
+
+.signUpBtn button:hover {
+    opacity: 0.9;
+}

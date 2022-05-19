@@ -1,7 +1,11 @@
+.wrap {
+    min-height: 800px;
+}
+
 .container {
     width: 335px;
     margin: 0 auto;
-    margin-top: 48px;
+    padding-top: 200px;
 }
 
 .container .title {
@@ -20,6 +24,10 @@
     display: -webkit-flex;
 }
 
+.container input:focus {
+    border: 1px solid #333;
+}
+
 .container .id,
 .container .password {
     display: flex;
@@ -35,3 +43,38 @@
     display: inline-block;
 }
 
+.container .signUp {
+    display: flex;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #444;
+    margin-top: 1rem;
+    cursor: pointer;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.container .signUp div.bar {
+    width: 20px;
+    text-align: center;
+}
+
+.container .signUp:hover {
+    opacity: 1;
+}
+
+.container .loginBtn button {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-top: 3rem;
+}
+
+.container .loginBtn button:hover {
+    opacity: 0.9;
+}

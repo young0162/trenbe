@@ -1,0 +1,185 @@
+.wrap {
+}
+
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 5rem auto;
+}
+
+.border {
+    width: 100%;
+    background: rgb(247, 248, 249);
+    height: 10px;
+}
+
+
+.productBox {
+    width: 100%;
+    display: flex;
+}
+
+.productBox .productImage {
+    width: 100%;
+    max-width: 740px;
+    min-width: 300px;
+    height: 600px;
+    overflow: hidden;
+    text-align: center;
+    margin-right: 5rem;
+}
+
+.productBox .productImage img {
+    width: 100%;
+}
+
+.productBox .productPrice {
+    max-width: 500px;
+    width: 100%;
+}
+
+.productBox .productPrice > div {
+    margin-top: 2rem;
+}
+
+.productBox .productPrice .flex {
+    display: flex;
+}
+
+.productBox .productPrice .flex > div {
+    margin-right: 1.5rem;
+}
+
+.productBox .productPrice .flex .title {
+    width: 100px;
+}
+
+.productBox .productPrice .flex button {
+    width: 48%;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+}
+
+.productBox .productPrice .flex button.confirm {
+    background: #333;
+    color: #fff;
+    margin-right: 4%;
+}
+
+.productBox .productPrice .flex button.confirm:hover {
+    opacity: 0.9;
+}
+
+.productBox .productPrice .flex button.cart {
+    border: 1px solid rgb(207, 213, 219);
+    color: rgb(76, 84, 91);
+    background: #fff;
+}
+
+.productBox .productPrice select {
+    border-radius: 6px;
+    border: 1px solid #d5d5d5;
+    width: 100px;
+    height: 40px;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.container .tab {
+    display: flex;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.container .tab > div {
+    width: 25%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.container .tab > div.right {
+    border-right: 1px solid #ddd;
+}
+
+.container .tab1 > div.active {
+    border-top: 2px solid #333;
+    border-right: 1px solid #ddd;
+    border-bottom: none;
+}
+
+.container .detailInfo {
+    text-align: center;
+    padding: 10rem 0;
+}
+
+.container .tab2 > div.active {
+    border-top: 2px solid #333;
+    border-bottom: none;
+}
+
+.container .notice {
+    padding: 5rem 10rem;
+}
+
+.container .tab3 > div.active {
+    border-top: 2px solid #333;
+    border-bottom: none;
+}
+
+.container .tab4 > div.active {
+    border-top: 2px solid #333;
+    border-bottom: none;
+}
+
+.container .review,
+.container .qna {
+    padding: 10rem 5rem;
+}
+
+.container .review > div,
+.container .qna > div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .review .title,
+.container .qna .title{
+    font-size: 2rem;
+    font-weight: bold;
+    padding-left: 200px;
+}
+
+.container .review .btnBox button,
+.container .qna .btnBox button{
+    width: 100px;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.container .review .btnBox button:nth-of-type(1),
+.container .qna .btnBox button:nth-of-type(1){
+    margin-right: 10px;
+}
+
+.container .review .btnBox button:hover,
+.container .qna .btnBox button:hover{
+    border-color: #333;
+}
+
+.container .review .board,
+.container .qna .board {
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    height: 300px;
+    align-items: center;
+    border: 1px solid #ddd;
+    margin-top: 2rem;
+}
