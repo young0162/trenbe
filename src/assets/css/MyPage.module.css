@@ -1,0 +1,64 @@
+.wrap {
+    min-height: 800px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 5rem auto;
+}
+
+.myPageTitle {
+    text-align: center;
+}
+
+.myPageTitle span {
+    font-weight: bold;
+}
+
+.tab {
+    max-width: 1000px;
+    margin: 50px auto;
+    display: flex;
+    cursor: pointer;
+}
+
+.tab div {
+    width: 50%;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ededed;
+    box-sizing: border-box;
+}
+
+.tab div.active {
+    border-bottom: 2px solid #333;
+}
+
+.subscribeList .titleBar{
+    display: flex;
+    text-align: center;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+    height: 50px;
+    line-height: 50px;
+}
+
+.subscribeList .titleBar div {
+    flex: 1;
+}
+
+.subscribeList .listTable {
+    display: flex;
+}
+
+.subscribeList .listTable > div {
+    flex: 1;
+    text-align: center;
+    height: 100px;
+    padding: 15px 0;
+    box-sizing: border-box;
+}

@@ -3,17 +3,42 @@ import styles from '../assets/css/Product.module.css';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { RePrice } from '../util/RePrice';
+import {useCookies} from "react-cookie";
 
 const Product = () => {
 
     const { productId } = useParams();
     const [productInfo, setProductInfo] = useState([]);
     const [selectMonth, setSelectMonth] = useState(60);
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
+    const [isLogin, setIsLogin] = useState(false);
 
+
+    const addSubscribe = () => {
+        const data = {
+            "monthly_price": productInfo.price / selectMonth,
+            "period": selectMonth,
+        }
+
+        console.log('data', data)
+
+        // axios.post('http://3.39.198.214:8080/users/me', data)
+        //     .then((res) => {
+        //         console.log('res' , res)
+        //     })
+        //     .catch((error) => {
+        //         console.log('error-addSubscribe', error)
+        //     })
+    }
 
 
     useEffect(() => {
-        console.log("productId" , productId)
+
+        if(cookies.token !== undefined) {
+            setIsLogin(true);
+        } else {
+            setIsLogin(false);
+        }
 
         axios.get(`http://3.39.198.214:8080/products/${productId}`)
             .then((res) => {
@@ -59,8 +84,8 @@ const Product = () => {
                             <div>{RePrice(Math.floor(productInfo?.price / selectMonth))} 원</div>
                         </div>
                         <div className={styles.flex}>
-                            <button className={styles.confirm}>구독 신청하기</button>
-                            <button className={styles.cart}>장바구니</button>
+                            { isLogin && <button className={styles.confirm} onClick={addSubscribe} >구독 신청하기</button> }
+                            {/*<button className={styles.cart}>장바구니</button>*/}
                         </div>
                     </div>
                 </div>
