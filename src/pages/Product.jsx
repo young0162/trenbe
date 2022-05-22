@@ -20,15 +20,17 @@ const Product = () => {
             "period": selectMonth,
         }
 
-        console.log('data', data)
-
-        // axios.post('http://3.39.198.214:8080/users/me', data)
-        //     .then((res) => {
-        //         console.log('res' , res)
-        //     })
-        //     .catch((error) => {
-        //         console.log('error-addSubscribe', error)
-        //     })
+        axios.post(`http://3.39.198.214:8080/products/${productId}/subscriptions` , data)
+            .then((res) => {
+                if(res && res.status === 200) {
+                    alert('구독 신청이 완료 되었습니다.');
+                } else {
+                    alert('구독 신청에 실패 했습니다.')
+                }
+            })
+            .catch((error) => {
+                console.log('error-addSubscribe', error)
+            })
     }
 
 
@@ -42,8 +44,6 @@ const Product = () => {
 
         axios.get(`http://3.39.198.214:8080/products/${productId}`)
             .then((res) => {
-                console.log('product' , res.data);
-
                 setProductInfo(res.data);
             })
             .catch((error) => { console.log('error', error) });
@@ -90,13 +90,13 @@ const Product = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.border} />
+            <div className={styles.border} id={"detail"} />
             <div className={styles.container}>
                 <div className={`${styles.tab} ${styles.tab1}`}>
-                    <div className={styles.active}>상품정보</div>
-                    <div className={styles.right}>유의사항</div>
-                    <div className={styles.right}>상품후기(0)</div>
-                    <div>상품문의(0)</div>
+                    <div className={styles.active}><a href={"#detail"}>상품정보</a> </div>
+                    <div className={styles.right}><a href={"#notice"}>유의사항</a></div>
+                    <div className={styles.right}><a href={"#review"}>상품후기(0)</a></div>
+                    <div><a href={"#qna"}>상품문의(0)</a></div>
                 </div>
                 <div className={styles.detailInfo}>
                     {
@@ -108,13 +108,13 @@ const Product = () => {
                     }
                 </div>
             </div>
-            <div className={styles.border} />
+            <div className={styles.border} id={"notice"} />
             <div className={styles.container}>
                 <div className={`${styles.tab} ${styles.tab2}`}>
-                    <div className={styles.right}>상품정보</div>
-                    <div className={`${styles.active} ${styles.right}`}>유의사항</div>
-                    <div className={styles.right}>상품후기(0)</div>
-                    <div>상품문의(0)</div>
+                    <div className={styles.right}><a href={"#detail"}>상품정보</a></div>
+                    <div className={`${styles.active} ${styles.right}`}><a href={"#notice"}>유의사항</a></div>
+                    <div className={styles.right}><a href={"#review"}>상품후기(0)</a></div>
+                    <div><a href={"#qna"}>상품문의(0)</a></div>
                 </div>
 
                 <div className={styles.notice}>
@@ -122,13 +122,13 @@ const Product = () => {
                 </div>
 
             </div>
-            <div className={styles.border} />
+            <div className={styles.border} id={"review"} />
             <div className={styles.container}>
                 <div className={`${styles.tab} ${styles.tab3}`}>
-                    <div className={styles.right}>상품정보</div>
-                    <div className={styles.right}>유의사항</div>
-                    <div className={`${styles.active} ${styles.right}`}>상품후기(0)</div>
-                    <div>상품문의(0)</div>
+                    <div className={styles.right}><a href={"#detail"}>상품정보</a></div>
+                    <div className={styles.right}><a href={"#notice"}>유의사항</a></div>
+                    <div className={`${styles.active} ${styles.right}`}><a href={"#review"}>상품후기(0)</a></div>
+                    <div><a href={"#qna"}>상품문의(0)</a></div>
                 </div>
                 <div className={styles.review}>
                     <div>
@@ -144,13 +144,13 @@ const Product = () => {
                     <div className={styles.board}>게시물이 없습니다.</div>
                 </div>
             </div>
-            <div className={styles.border} />
+            <div className={styles.border} id={"qna"} />
             <div className={styles.container}>
                 <div className={`${styles.tab} ${styles.tab4}`}>
-                    <div className={styles.right}>상품정보</div>
-                    <div className={styles.right}>유의사항</div>
-                    <div className={styles.right}>상품후기(0)</div>
-                    <div className={styles.active}>상품문의(0)</div>
+                    <div className={styles.right}><a href={"#detail"}>상품정보</a></div>
+                    <div className={styles.right}><a href={"#notice"}>유의사항</a></div>
+                    <div className={styles.right}><a href={"#review"}>상품후기(0)</a></div>
+                    <div className={styles.active}><a href={"#qna"}>상품문의(0)</a></div>
                 </div>
 
                 <div className={styles.qna}>

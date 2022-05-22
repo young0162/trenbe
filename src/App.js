@@ -6,6 +6,7 @@ import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
 import MyPage from "./pages/MyPage";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path={`/product/:productId`} exact element={<Product />} />
           <Route path="/signUp" exact element={<SignUp />} />
           <Route path="/myPage" exact element={<MyPage />} />
+          <Route path="/category/:category/:brand" exact element={<Category />} />
       </Routes>
 
         <Footer/>

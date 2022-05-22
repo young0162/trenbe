@@ -3,7 +3,6 @@
     max-width: 1920px;
     padding: 0 48px;
     box-sizing: border-box;
-    height: 100px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -45,4 +44,24 @@
 .header_inner .header_flex .login a:hover,
 .header_inner .header_flex .login button:hover{
     opacity: 0.9;
+}
+
+.header_inner .header_flex .flex {
+    display: flex;
+}
+
+.header_inner .category_flex {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.header_inner .header_flex .flex div {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.header_inner .header_flex .flex div:hover {
+    opacity: 0.8;
 }

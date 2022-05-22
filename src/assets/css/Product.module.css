@@ -95,6 +95,10 @@
     cursor: pointer;
 }
 
+.container .tab a {
+    display: block;
+}
+
 .container .tab > div {
     width: 25%;
     height: 50px;

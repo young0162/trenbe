@@ -11,8 +11,6 @@ const Main = () => {
     useEffect(() => {
         axios.get('http://3.39.198.214:8080/products')
             .then((res) => {
-                console.log('res' , res.data.products);
-
                 setProductList(res.data.products);
             })
             .catch((error) => { console.log('error', error) })

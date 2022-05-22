@@ -10,38 +10,46 @@ const Header = () => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const [isLogin, setIsLogin] = useState(false);
+    const [brand, setBrands] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${cookies.token}`
+        },
+    }
 
     const logOut = () => {
         removeCookie('token');
-        window.location.reload();
+        window.location.href = ('/');
+    }
+
+    const getAllBrands = () => {
+        axios.get('http://3.39.198.214:8080/brands')
+            .then((res) => {
+                setBrands(res.data);
+            })
+            .catch((error) => { console.log('error', error) })
+    }
+
+    const getAllCategories = () => {
+        axios.get('http://3.39.198.214:8080/categories')
+            .then((res) => {
+                setCategories(res.data.categories);
+            })
+            .catch((error) => { console.log('error', error) })
     }
 
     useEffect(() => {
-        console.log('cookie' , cookies.token !== undefined)
-
         if(cookies.token !== undefined) {
             setIsLogin(true);
         } else {
             setIsLogin(false);
         }
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${cookies.token}`
-            },
-        }
+        getAllBrands();
+        getAllCategories();
 
-        axios.get('http://3.39.198.214:8080/users/me', config)
-            .then((res) => {
-                if(res && res.status === 200) {
-
-                } else {
-
-                }
-            })
-            .catch((error) => {
-                console.log('header-error', error)
-            })
     }, []);
 
 
@@ -69,6 +77,19 @@ const Header = () => {
                                 마이페이지
                             </Link>
                         </div>
+                    </div>
+                </div>
+                <div className={`${styles.header_flex} ${styles.category_flex}`}>
+                    <div className={styles.flex}>
+                        {
+                            categories && categories?.map((data, index) => {
+                                return (
+                                    <div key={index}>
+                                        <Link to={`/category/${data.name}/all`}>{data.name}</Link>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>

@@ -44,6 +44,11 @@ const SignUp = () => {
             "received_marketing_agreed" : signUpInfo.marketing === undefined ? false : signUpInfo.marketing
         }
 
+        if(passwordCheck || passwordLength) {
+            alert('비밀번호를 확인해주세요.');
+            return;
+        }
+
         if(!signUpInfo.agree) {
             return alert('필수 이용약관에 동의 해주세요.');
         }

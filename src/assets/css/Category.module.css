@@ -1,0 +1,110 @@
+.wrap {
+    min-height: 800px;
+}
+
+.container {
+    width: 1440px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.container .title {
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 15px 0;
+    border-bottom: 3px solid #333;
+    margin-bottom: 20px;
+}
+
+.content_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content_wrap .menuBar {
+    width: 10%;
+    border-top: 1px solid #d5d5d5;
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+
+.content_wrap .menuBar .menuTitle {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.content_wrap .menuBar .menu a {
+    color: #555;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.content_wrap .menuBar .menu a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.content_wrap .menuBar .menu a:hover {
+    font-weight: bold;
+    color: #333;
+}
+
+.content_wrap .menuBar .menu a.active {
+    font-weight: bold;
+    color: #333;
+}
+
+
+.content_wrap .content_box {
+    width: 85%;
+    border-top: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    padding-top: 20px;
+}
+.content_box .product_item {
+    width: 23%;
+    margin-right: 2%;
+}
+
+.content_box .product_item .itemInfo {
+    margin-top: 1rem;
+}
+
+.content_box .product_item:nth-child(4n) {
+    margin-right: 0;
+}
+
+.content_box .product_item .imgBox{
+    overflow: hidden;
+    width: 100%;
+    height: 30rem;
+    border: 1px solid #ddd;
+}
+
+.content_box .product_item .imgBox img {
+    width: 100%;
+}
+
+.content_box .product_item .brandName {
+    font-weight: 500;
+    font-size: 1.6rem;
+}
+
+.content_box .product_item .fullName {
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.content_box .product_item .price {
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.content_box .product_item .price .mPrice {
+    margin-left: 0.5rem;
+    color: #aaa;
+    font-size: 1.3rem;
+}
