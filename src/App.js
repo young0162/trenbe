@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
@@ -11,18 +11,18 @@ import Category from "./pages/Category";
 function App() {
   return (
     <BrowserRouter>
-      <Header/>
+      <Header />
 
       <Routes>
-          <Route path="/" exact element={<Main />} />
-          <Route path="/login" exact element={<Login />} />
-          <Route path={`/product/:productId`} exact element={<Product />} />
-          <Route path="/signUp" exact element={<SignUp />} />
-          <Route path="/myPage" exact element={<MyPage />} />
-          <Route path="/category/:category/:brand" exact element={<Category />} />
+        <Route path="/" exact element={<Main />} />
+        <Route path="/login" exact element={<Login />} />
+        <Route path={`/product/:productId`} exact element={<Product />} />
+        <Route path="/signUp" exact element={<SignUp />} />
+        <Route path="/myPage" exact element={<MyPage />} />
+        <Route path="/category/:category/:brand" exact element={<Category />} />
       </Routes>
 
-        <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
