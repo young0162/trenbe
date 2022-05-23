@@ -110,6 +110,11 @@ const MyPage = () => {
   };
 
   useEffect(() => {
+    if (cookies.token === undefined) {
+      alert("로그인을 해주시기 바랍니다.");
+      window.location.href = "/login";
+    }
+
     getMyUserInfo();
     getMySubscriptions();
   }, []);

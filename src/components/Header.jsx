@@ -65,11 +65,13 @@ const Header = () => {
           <div className={styles.mypage_menu}>
             <div className={styles.login}>
               {isLogin === true ? (
-                <button onClick={logOut}>로그아웃</button>
+                <>
+                  <button onClick={logOut}>로그아웃</button>
+                  <Link to={"/myPage"}>마이페이지</Link>
+                </>
               ) : (
                 <Link to={"/login"}>로그인</Link>
               )}
-              <Link to={"/myPage"}>마이페이지</Link>
             </div>
           </div>
         </div>
