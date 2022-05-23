@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "../assets/css/MyPage.module.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { FormControlLabel, FormGroup } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
 import moment from "moment";
 import { RePrice } from "../util/RePrice";
 
