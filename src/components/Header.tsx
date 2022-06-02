@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "../assets/css/Header.module.css";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { ICategorys } from "../util/db";
 
 const Header = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [isLogin, setIsLogin] = useState(false);
   const [brand, setBrands] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<ICategorys>([]);
 
   const config = {
     headers: {

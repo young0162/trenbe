@@ -3,11 +3,12 @@ import styles from "../assets/css/Category.module.css";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { RePrice } from "../util/RePrice";
+import { IBrands, IProductInfos } from "../util/db";
 
 const Category = () => {
   const { category } = useParams();
-  const [brands, setBrands] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [brands, setBrands] = useState<IBrands>();
+  const [products, setProducts] = useState<IProductInfos>([]);
   const [nowBrand, setNowBrand] = useState("all");
 
   const getAllBrands = () => {
@@ -32,7 +33,7 @@ const Category = () => {
       });
   };
 
-  const changeBrand = (brand) => {
+  const changeBrand = (brand:string) => {
     setNowBrand(brand);
   };
 
@@ -86,9 +87,9 @@ const Category = () => {
                               data.image_urls.map((imgUrls, index) => {
                                 return (
                                   <img
-                                    src={imgUrls}
-                                    alt={imgUrls}
-                                    key={imgUrls}
+                                    src={`${imgUrls}`}
+                                    alt={`${imgUrls}`}
+                                    key={index}
                                   />
                                 );
                               })}
@@ -122,9 +123,9 @@ const Category = () => {
                               data.image_urls.map((imgUrls, index) => {
                                 return (
                                   <img
-                                    src={imgUrls}
-                                    alt={imgUrls}
-                                    key={imgUrls}
+                                    src={`${imgUrls}`}
+                                    alt={`${imgUrls}`}
+                                    key={index}
                                   />
                                 );
                               })}

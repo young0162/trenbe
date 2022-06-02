@@ -5,15 +5,15 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 
 const Login = () => {
-  const [id, setId] = useState();
-  const [pw, setPw] = useState();
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
-  const getId = (value) => {
+  const getId = (value: string) => {
     setId(value);
   };
 
-  const getPw = (value) => {
+  const getPw = (value: string) => {
     setPw(value);
   };
 
@@ -36,7 +36,7 @@ const Login = () => {
       });
   };
 
-  const enterLogin = (e) => {
+  const enterLogin = (e:HTMLFormElement) => {
     if (e.key === "Enter") {
       signIn();
     }
@@ -59,7 +59,7 @@ const Login = () => {
           <input
             type={"password"}
             onChange={(e) => getPw(e.target.value)}
-            onKeyPress={enterLogin}
+            onKeyPress={(e) => enterLogin}
             placeholder={"비밀번호"}
           />
         </div>

@@ -3,13 +3,15 @@ import styles from "../assets/css/SignUp.module.css";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel, FormGroup } from "@mui/material";
 import axios from "axios";
+import { ISignInfo } from "../util/db";
 
 const SignUp = () => {
-  const [signUpInfo, setSignUpInfo] = useState({ phone1: "010" });
+  const [signUpInfo, setSignUpInfo] = useState<ISignInfo | null>({phone1 : "010"});
   const [passwordLength, setPasswordLength] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState(false);
 
-  const getInputValue = (type, value) => {
+  const getInputValue = (e:React.ChangeEvent<HTMLInputElement>, type:string) => {
+    const value = e.target.value;
     setSignUpInfo({ ...signUpInfo, [type]: value });
 
     if (type === "password") {
@@ -20,8 +22,8 @@ const SignUp = () => {
       }
 
       if (
-        signUpInfo.passwordCheck?.length > 0 &&
-        value !== signUpInfo.passwordCheck
+        (signUpInfo?.passwordCheck && signUpInfo?.passwordCheck?.length > 0) &&
+        value !== signUpInfo?.passwordCheck
       ) {
         setPasswordCheck(true);
       } else {
@@ -29,21 +31,21 @@ const SignUp = () => {
       }
     }
 
-    if (type === "passwordCheck" && value !== signUpInfo.password) {
+    if (type === "passwordCheck" && value !== signUpInfo?.password) {
       setPasswordCheck(true);
-    } else if (type === "passwordCheck" && value === signUpInfo.password) {
+    } else if (type === "passwordCheck" && value === signUpInfo?.password) {
       setPasswordCheck(false);
     }
   };
 
   const sendSignUp = () => {
     const data = {
-      email: signUpInfo.id,
-      nick_name: signUpInfo.nickname,
-      password: signUpInfo.password,
-      phone: signUpInfo.phone1 + signUpInfo.phone2 + signUpInfo.phone3,
+      email: signUpInfo?.id,
+      nick_name: signUpInfo?.nickname,
+      password: signUpInfo?.password,
+      phone:  signUpInfo?.phone1 && (signUpInfo?.phone1 + signUpInfo?.phone2 + signUpInfo.phone3),
       received_marketing_agreed:
-        signUpInfo.marketing === undefined ? false : signUpInfo.marketing,
+        signUpInfo?.marketing === undefined ? false : signUpInfo?.marketing,
     };
 
     if (passwordCheck || passwordLength) {
@@ -51,7 +53,7 @@ const SignUp = () => {
       return;
     }
 
-    if (!signUpInfo.agree) {
+    if (!signUpInfo?.agree) {
       return alert("필수 이용약관에 동의 해주세요.");
     }
 
@@ -79,7 +81,7 @@ const SignUp = () => {
           <div className={styles.inputDiv}>
             <input
               type={"text"}
-              onChange={(e) => getInputValue("id", e.target.value)}
+              onChange={(e) => getInputValue(e, "id")}
               placeholder={"아이디"}
             />
           </div>
@@ -89,7 +91,7 @@ const SignUp = () => {
           <div className={styles.inputDiv}>
             <input
               type={"password"}
-              onChange={(e) => getInputValue("password", e.target.value)}
+              onChange={(e) => getInputValue(e, "password")}
               placeholder={"비밀번호 8자 이상"}
             />
             {passwordLength && (
@@ -104,7 +106,7 @@ const SignUp = () => {
           <div className={styles.inputDiv}>
             <input
               type={"password"}
-              onChange={(e) => getInputValue("passwordCheck", e.target.value)}
+              onChange={(e) => getInputValue(e, "passwordCheck")}
               placeholder={"비밀번호 확인"}
             />
             {passwordCheck && (
@@ -119,7 +121,7 @@ const SignUp = () => {
           <div className={styles.inputDiv}>
             <input
               type={"text"}
-              onChange={(e) => getInputValue("nickname", e.target.value)}
+              onChange={(e) => getInputValue(e, "nickname")}
               placeholder={"닉네임을 입력해주세요."}
             />
           </div>
@@ -129,7 +131,7 @@ const SignUp = () => {
           <div className={styles.inputDiv}>
             <input
               type={"text"}
-              onChange={(e) => getInputValue("name", e.target.value)}
+              onChange={(e) => getInputValue(e, "name")}
               placeholder={"반드시 실명을 입력해주세요."}
             />
           </div>
@@ -137,19 +139,19 @@ const SignUp = () => {
         <div className={styles.inputWrap}>
           <div className={styles.title}>연락처</div>
           <div className={`${styles.inputDiv} ${styles.flex}`}>
-            <select onChange={(e) => getInputValue("phone1", e.target.value)}>
+            <select onChange={(e) => setSignUpInfo({...signUpInfo, "phone1": e.target.value})} value={signUpInfo?.phone1}>
               <option value={"010"}>010</option>
               <option value={"011"}>011</option>
             </select>
             &nbsp;-&nbsp;
             <input
               type={"text"}
-              onChange={(e) => getInputValue("phone2", e.target.value)}
+              onChange={(e) => getInputValue(e, "phone2")}
             />
             &nbsp;-&nbsp;
             <input
               type={"text"}
-              onChange={(e) => getInputValue("phone3", e.target.value)}
+              onChange={(e) => getInputValue(e, "phone3")}
             />
           </div>
         </div>
@@ -159,7 +161,7 @@ const SignUp = () => {
               control={
                 <Checkbox
                   color="secondary"
-                  onChange={(e) => getInputValue("agree", e.target.checked)}
+                  onChange={(e) => getInputValue(e, "agree")}
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
                 />
               }
@@ -169,7 +171,7 @@ const SignUp = () => {
               control={
                 <Checkbox
                   color="secondary"
-                  onChange={(e) => getInputValue("marketing", e.target.checked)}
+                  onChange={(e) => getInputValue(e, "marketing")}
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
                 />
               }
@@ -184,5 +186,6 @@ const SignUp = () => {
     </div>
   );
 };
+
 
 export default SignUp;

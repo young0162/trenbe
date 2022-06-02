@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, ReactHTMLElement, ReactNode, useEffect, useState } from "react";
 import styles from "../assets/css/Product.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { RePrice } from "../util/RePrice";
 import { useCookies } from "react-cookie";
+import { IProductInfo } from "../util/db";
 
 const Product = () => {
   const { productId } = useParams();
-  const [productInfo, setProductInfo] = useState([]);
+  const [productInfo, setProductInfo] = useState<IProductInfo>();
   const [selectMonth, setSelectMonth] = useState(60);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [isLogin, setIsLogin] = useState(false);
 
   const addSubscribe = () => {
     const data = {
-      monthly_price: productInfo.price / selectMonth,
+      monthly_price: productInfo && productInfo.price / selectMonth,
       period: selectMonth,
     };
 
@@ -34,6 +35,11 @@ const Product = () => {
         console.log("error-addSubscribe", error);
       });
   };
+
+  const getSelectMonth = (e:React.ChangeEvent<HTMLSelectElement>) => {
+      const value = Number(e.target.value)
+      setSelectMonth(value);
+  }
 
   useEffect(() => {
     if (cookies.token !== undefined) {
@@ -59,7 +65,7 @@ const Product = () => {
           <div className={styles.productImage}>
             {productInfo &&
               productInfo?.image_urls?.map((dataUrl, index) => {
-                return <img src={dataUrl} alt={dataUrl} key={index} />;
+                return <img src={`${dataUrl}`} alt={`${dataUrl}`} key={index} />;
               })}
           </div>
           <div className={styles.productPrice}>
@@ -71,14 +77,12 @@ const Product = () => {
               <div className={styles.title}>구독 개월 수</div>
               <select
                 value={selectMonth}
-                onChange={(e) => setSelectMonth(e.target.value)}
+                onChange={(e) => getSelectMonth(e)}
               >
                 {productInfo &&
                   productInfo.subscription_periods?.map((month, index) => {
                     return (
-                      <option key={month} value={month}>
-                        {month} 개월
-                      </option>
+                      <option value={`${month}`} key={index}>{`${month}`}</option>
                     );
                   })}
               </select>
@@ -86,7 +90,7 @@ const Product = () => {
             <div className={styles.flex}>
               <div className={styles.title}>월 구독료</div>
               <div>
-                {RePrice(Math.floor(productInfo?.price / selectMonth))} 원
+                {productInfo && RePrice(Math.floor(productInfo?.price / selectMonth))} 원
               </div>
             </div>
             <div className={styles.flex}>
@@ -119,7 +123,7 @@ const Product = () => {
         <div className={styles.detailInfo}>
           {productInfo &&
             productInfo?.image_urls?.map((dataUrl, index) => {
-              return <img src={dataUrl} alt={dataUrl} key={index} />;
+              return <img src={`${dataUrl}`} alt={`${dataUrl}`} key={index} />;
             })}
         </div>
       </div>

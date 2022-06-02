@@ -4,13 +4,14 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import moment from "moment";
 import { RePrice } from "../util/RePrice";
+import { IModifyInfo, ISubscribeInfos, IUserInfo } from "../util/db";
 
 const MyPage = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-  const [subscribeInfo, setSubscribeInfo] = useState([]);
-  const [userInfo, setUserInfo] = useState({});
+  const [subscribeInfo, setSubscribeInfo] = useState<ISubscribeInfos>();
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
   const [tabShow, setTabShow] = useState("subscription");
-  const [modifyInfo, setModifyInfo] = useState({});
+  const [modifyInfo, setModifyInfo] = useState<IModifyInfo>({});
   const [passwordLength, setPasswordLength] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState(false);
 
@@ -45,7 +46,8 @@ const MyPage = () => {
       });
   };
 
-  const getInputValue = (type, value) => {
+  const getInputValue = (type:string, e:React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
     setModifyInfo({ ...modifyInfo, [type]: value });
 
     if (type === "password") {
@@ -56,8 +58,8 @@ const MyPage = () => {
       }
 
       if (
-        modifyInfo.passwordCheck?.length > 0 &&
-        value !== modifyInfo.passwordCheck
+        (modifyInfo.passwordCheck && modifyInfo.passwordCheck?.length > 0) &&
+        value !== modifyInfo?.passwordCheck
       ) {
         setPasswordCheck(true);
       } else {
@@ -97,14 +99,14 @@ const MyPage = () => {
       });
   };
 
-  const reDate = (value) => {
+  const reDate = (value:string) => {
     return moment(value).format("YYYY.MM.DD");
   };
 
-  const calcSubscribe = (value, period) => {
+  const calcSubscribe = (value:string, period:string) => {
     const date = new Date(value);
 
-    date.setMonth(date.getMonth() + period);
+    date.setMonth(date.getMonth() + Number(period));
 
     return moment(date).format("YYYY.MM.DD");
   };
@@ -123,7 +125,7 @@ const MyPage = () => {
     <div className={styles.wrap}>
       <div className={styles.container}>
         <div className={styles.myPageTitle}>
-          안녕하세요, <span>{userInfo.nick_name}</span> 님 <br />
+          안녕하세요, <span>{userInfo?.nick_name}</span> 님 <br />
           고객님과는 <span>처음보는 사이</span>입니다.
         </div>
         <div className={styles.tab}>
@@ -156,7 +158,7 @@ const MyPage = () => {
                         {data.product.image_urls &&
                           data.product.image_urls.map((imgUrls, idx) => {
                             return (
-                              <img src={imgUrls} alt={imgUrls} key={idx} />
+                              <img src={`${imgUrls}`} alt={`${imgUrls}`} key={idx} />
                             );
                           })}
                       </div>
@@ -178,7 +180,7 @@ const MyPage = () => {
             <div className={styles.inputWrap}>
               <div className={styles.title}>아이디</div>
               <div className={styles.inputDiv}>
-                <input type={"text"} value={userInfo.email} disabled={true} />
+                <input type={"text"} value={userInfo?.email} disabled={true} />
               </div>
             </div>
             <div className={styles.inputWrap}>
@@ -186,7 +188,7 @@ const MyPage = () => {
               <div className={styles.inputDiv}>
                 <input
                   type={"password"}
-                  onChange={(e) => getInputValue("password", e.target.value)}
+                  onChange={(e) => getInputValue("password", e)}
                   placeholder={"비밀번호 8자 이상"}
                 />
                 {passwordLength && (
@@ -202,7 +204,7 @@ const MyPage = () => {
                 <input
                   type={"password"}
                   onChange={(e) =>
-                    getInputValue("passwordCheck", e.target.value)
+                    getInputValue("passwordCheck", e)
                   }
                   placeholder={"비밀번호 확인"}
                 />
@@ -218,7 +220,7 @@ const MyPage = () => {
               <div className={styles.inputDiv}>
                 <input
                   type={"text"}
-                  onChange={(e) => getInputValue("nick_name", e.target.value)}
+                  onChange={(e) => getInputValue("nick_name", e)}
                   value={modifyInfo.nick_name}
                   placeholder={"닉네임"}
                 />
@@ -230,7 +232,7 @@ const MyPage = () => {
                 <input
                   type={"text"}
                   value={modifyInfo.phone}
-                  onChange={(e) => getInputValue("phone", e.target.value)}
+                  onChange={(e) => getInputValue("phone", e)}
                 />
               </div>
             </div>

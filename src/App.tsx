@@ -7,19 +7,20 @@ import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
 import MyPage from "./pages/MyPage";
 import Category from "./pages/Category";
+import React from "react";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Header />
 
       <Routes>
-        <Route path="/" exact element={<Main />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path={`/product/:productId`} exact element={<Product />} />
-        <Route path="/signUp" exact element={<SignUp />} />
-        <Route path="/myPage" exact element={<MyPage />} />
-        <Route path="/category/:category/:brand" exact element={<Category />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+        <Route path={`/product/:productId`} element={<Product />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/myPage" element={<MyPage />} />
+        <Route path="/category/:category/:brand" element={<Category />} />
       </Routes>
 
       <Footer />

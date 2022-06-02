@@ -3,9 +3,10 @@ import styles from "../assets/css/Main.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { RePrice } from "../util/RePrice";
+import { IProductInfos } from "../util/db";
 
 const Main = () => {
-  const [productList, setProductList] = useState([]);
+  const [productList, setProductList] = useState<IProductInfos>();
 
   useEffect(() => {
     axios
@@ -33,7 +34,7 @@ const Main = () => {
                         {data.image_urls &&
                           data.image_urls.map((imgUrls, index) => {
                             return (
-                              <img src={imgUrls} alt={imgUrls} key={imgUrls} />
+                              <img src={`${imgUrls}`} alt={`${imgUrls}`} key={index} />
                             );
                           })}
                       </div>
