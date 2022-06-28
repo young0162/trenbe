@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import styles from "../assets/css/Main.module.css";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { RePrice } from "../util/RePrice";
-import { IProductInfos } from "../util/db";
+import React, { useEffect, useState } from 'react';
+import styles from '../assets/css/Main.module.css';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { RePrice } from '../util/RePrice';
+import { IProductInfos } from '../util/db';
 
 const Main = () => {
   const [productList, setProductList] = useState<IProductInfos>();
 
   useEffect(() => {
     axios
-      .get("http://3.39.198.214:8080/products")
-      .then((res) => {
+      .get('http://3.39.198.214:8080/products')
+      .then(res => {
         setProductList(res.data.products);
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(error => {
+        console.log('error', error);
       });
   }, []);
 
@@ -34,7 +34,11 @@ const Main = () => {
                         {data.image_urls &&
                           data.image_urls.map((imgUrls, index) => {
                             return (
-                              <img src={`${imgUrls}`} alt={`${imgUrls}`} key={index} />
+                              <img
+                                src={`${imgUrls}`}
+                                alt={`${imgUrls}`}
+                                key={index}
+                              />
                             );
                           })}
                       </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
-export const RePrice = (price:number) => {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+export const RePrice = (price: number) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };

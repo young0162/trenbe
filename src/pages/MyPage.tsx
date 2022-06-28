@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import styles from "../assets/css/MyPage.module.css";
-import axios from "axios";
-import { useCookies } from "react-cookie";
-import moment from "moment";
-import { RePrice } from "../util/RePrice";
-import { IModifyInfo, ISubscribeInfos, IUserInfo } from "../util/db";
+import React, { useEffect, useState } from 'react';
+import styles from '../assets/css/MyPage.module.css';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import moment from 'moment';
+import { RePrice } from '../util/RePrice';
+import { IModifyInfo, ISubscribeInfos, IUserInfo } from '../util/db';
 
 const MyPage = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
   const [subscribeInfo, setSubscribeInfo] = useState<ISubscribeInfos>();
   const [userInfo, setUserInfo] = useState<IUserInfo>();
-  const [tabShow, setTabShow] = useState("subscription");
+  const [tabShow, setTabShow] = useState('subscription');
   const [modifyInfo, setModifyInfo] = useState<IModifyInfo>({});
   const [passwordLength, setPasswordLength] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState(false);
@@ -23,34 +23,37 @@ const MyPage = () => {
 
   const getMySubscriptions = () => {
     axios
-      .get("http://3.39.198.214:8080/users/me/subscriptions", config)
-      .then((res) => {
+      .get('http://3.39.198.214:8080/users/me/subscriptions', config)
+      .then(res => {
         setSubscribeInfo(res.data.subscriptions);
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(error => {
+        console.log('error', error);
       });
   };
 
   const getMyUserInfo = () => {
     axios
-      .get("http://3.39.198.214:8080/users/me", config)
-      .then((res) => {
+      .get('http://3.39.198.214:8080/users/me', config)
+      .then(res => {
         if (res && res.status === 200) {
           setUserInfo(res.data);
           setModifyInfo(res.data);
         }
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(error => {
+        console.log('error', error);
       });
   };
 
-  const getInputValue = (type:string, e:React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
+  const getInputValue = (
+    type: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = e.target.value;
     setModifyInfo({ ...modifyInfo, [type]: value });
 
-    if (type === "password") {
+    if (type === 'password') {
       if (value.length < 8) {
         setPasswordLength(true);
       } else {
@@ -58,7 +61,8 @@ const MyPage = () => {
       }
 
       if (
-        (modifyInfo.passwordCheck && modifyInfo.passwordCheck?.length > 0) &&
+        modifyInfo.passwordCheck &&
+        modifyInfo.passwordCheck?.length > 0 &&
         value !== modifyInfo?.passwordCheck
       ) {
         setPasswordCheck(true);
@@ -67,9 +71,9 @@ const MyPage = () => {
       }
     }
 
-    if (type === "passwordCheck" && value !== modifyInfo.password) {
+    if (type === 'passwordCheck' && value !== modifyInfo.password) {
       setPasswordCheck(true);
-    } else if (type === "passwordCheck" && value === modifyInfo.password) {
+    } else if (type === 'passwordCheck' && value === modifyInfo.password) {
       setPasswordCheck(false);
     }
   };
@@ -82,39 +86,39 @@ const MyPage = () => {
     };
 
     if (passwordCheck || passwordLength) {
-      alert("비밀번호를 확인해주세요.");
+      alert('비밀번호를 확인해주세요.');
       return;
     }
 
     axios
-      .put("http://3.39.198.214:8080/users/me", data, config)
-      .then((res) => {
+      .put('http://3.39.198.214:8080/users/me', data, config)
+      .then(res => {
         if (res && res.status === 200) {
-          alert("정보수정이 완료 되었습니다.");
+          alert('정보수정이 완료 되었습니다.');
           window.location.reload();
         }
       })
-      .catch((error) => {
-        console.log("update-error", error);
+      .catch(error => {
+        console.log('update-error', error);
       });
   };
 
-  const reDate = (value:string) => {
-    return moment(value).format("YYYY.MM.DD");
+  const reDate = (value: string): string => {
+    return moment(value).format('YYYY.MM.DD');
   };
 
-  const calcSubscribe = (value:string, period:string) => {
+  const calcSubscribe = (value: string, period: string): string => {
     const date = new Date(value);
 
     date.setMonth(date.getMonth() + Number(period));
 
-    return moment(date).format("YYYY.MM.DD");
+    return moment(date).format('YYYY.MM.DD');
   };
 
   useEffect(() => {
     if (cookies.token === undefined) {
-      alert("로그인을 해주시기 바랍니다.");
-      window.location.href = "/login";
+      alert('로그인을 해주시기 바랍니다.');
+      window.location.href = '/login';
     }
 
     getMyUserInfo();
@@ -130,19 +134,19 @@ const MyPage = () => {
         </div>
         <div className={styles.tab}>
           <div
-            className={`${tabShow === "subscription" && styles.active}`}
-            onClick={() => setTabShow("subscription")}
+            className={`${tabShow === 'subscription' && styles.active}`}
+            onClick={() => setTabShow('subscription')}
           >
             구독내역
           </div>
           <div
-            className={`${tabShow === "userInfo" && styles.active}`}
-            onClick={() => setTabShow("userInfo")}
+            className={`${tabShow === 'userInfo' && styles.active}`}
+            onClick={() => setTabShow('userInfo')}
           >
             정보수정
           </div>
         </div>
-        {tabShow === "subscription" ? (
+        {tabShow === 'subscription' ? (
           <div className={styles.subscribeList}>
             <div className={styles.titleBar}>
               <div>상품명(구독 개월 수)</div>
@@ -158,7 +162,11 @@ const MyPage = () => {
                         {data.product.image_urls &&
                           data.product.image_urls.map((imgUrls, idx) => {
                             return (
-                              <img src={`${imgUrls}`} alt={`${imgUrls}`} key={idx} />
+                              <img
+                                src={`${imgUrls}`}
+                                alt={`${imgUrls}`}
+                                key={idx}
+                              />
                             );
                           })}
                       </div>
@@ -167,7 +175,7 @@ const MyPage = () => {
                       </div>
                     </div>
                     <div>
-                      {reDate(data.updated_at)} ~{" "}
+                      {reDate(data.updated_at)} ~{' '}
                       {calcSubscribe(data.updated_at, data.period)}
                     </div>
                     <div>{RePrice(data.mothly_price)} 원</div>
@@ -180,16 +188,16 @@ const MyPage = () => {
             <div className={styles.inputWrap}>
               <div className={styles.title}>아이디</div>
               <div className={styles.inputDiv}>
-                <input type={"text"} value={userInfo?.email} disabled={true} />
+                <input type={'text'} value={userInfo?.email} disabled={true} />
               </div>
             </div>
             <div className={styles.inputWrap}>
               <div className={styles.title}>비밀번호</div>
               <div className={styles.inputDiv}>
                 <input
-                  type={"password"}
-                  onChange={(e) => getInputValue("password", e)}
-                  placeholder={"비밀번호 8자 이상"}
+                  type={'password'}
+                  onChange={e => getInputValue('password', e)}
+                  placeholder={'비밀번호 8자 이상'}
                 />
                 {passwordLength && (
                   <div className={styles.passwordTip}>
@@ -202,11 +210,9 @@ const MyPage = () => {
               <div className={styles.title} />
               <div className={styles.inputDiv}>
                 <input
-                  type={"password"}
-                  onChange={(e) =>
-                    getInputValue("passwordCheck", e)
-                  }
-                  placeholder={"비밀번호 확인"}
+                  type={'password'}
+                  onChange={e => getInputValue('passwordCheck', e)}
+                  placeholder={'비밀번호 확인'}
                 />
                 {passwordCheck && (
                   <div className={styles.passwordTip}>
@@ -219,10 +225,10 @@ const MyPage = () => {
               <div className={styles.title}>닉네임</div>
               <div className={styles.inputDiv}>
                 <input
-                  type={"text"}
-                  onChange={(e) => getInputValue("nick_name", e)}
+                  type={'text'}
+                  onChange={e => getInputValue('nick_name', e)}
                   value={modifyInfo.nick_name}
-                  placeholder={"닉네임"}
+                  placeholder={'닉네임'}
                 />
               </div>
             </div>
@@ -230,9 +236,9 @@ const MyPage = () => {
               <div className={styles.title}>전화번호</div>
               <div className={`${styles.inputDiv}`}>
                 <input
-                  type={"text"}
+                  type={'text'}
                   value={modifyInfo.phone}
-                  onChange={(e) => getInputValue("phone", e)}
+                  onChange={e => getInputValue('phone', e)}
                 />
               </div>
             </div>

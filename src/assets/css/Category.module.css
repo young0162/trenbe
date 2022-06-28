@@ -62,10 +62,15 @@
     border-top: 1px solid #d5d5d5;
     box-sizing: border-box;
     padding-top: 20px;
+    display: flex;
 }
 .content_box .product_item {
     width: 23%;
     margin-right: 2%;
+}
+
+.content_box .product_item:nth-child(2) {
+    display: none;
 }
 
 .content_box .product_item .itemInfo {

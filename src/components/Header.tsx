@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import styles from "../assets/css/Header.module.css";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { useCookies } from "react-cookie";
-import { ICategorys } from "../util/db";
+import React, { useEffect, useState } from 'react';
+import styles from '../assets/css/Header.module.css';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { ICategorys } from '../util/db';
 
 const Header = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
   const [isLogin, setIsLogin] = useState(false);
   const [brand, setBrands] = useState([]);
   const [categories, setCategories] = useState<ICategorys>([]);
@@ -18,29 +18,29 @@ const Header = () => {
   };
 
   const logOut = () => {
-    removeCookie("token");
-    window.location.href = "/";
+    removeCookie('token');
+    window.location.href = '/';
   };
 
   const getAllBrands = () => {
     axios
-      .get("http://3.39.198.214:8080/brands")
-      .then((res) => {
+      .get('http://3.39.198.214:8080/brands')
+      .then(res => {
         setBrands(res.data);
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(error => {
+        console.log('error', error);
       });
   };
 
   const getAllCategories = () => {
     axios
-      .get("http://3.39.198.214:8080/categories")
-      .then((res) => {
+      .get('http://3.39.198.214:8080/categories')
+      .then(res => {
         setCategories(res.data.categories);
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(error => {
+        console.log('error', error);
       });
   };
 
@@ -60,17 +60,17 @@ const Header = () => {
       <div className={styles.header_inner}>
         <div className={styles.header_flex}>
           <div className={styles.logo}>
-            <Link to={"/"}>trenㆍbe</Link>
+            <Link to={'/'}>trenㆍbe</Link>
           </div>
           <div className={styles.mypage_menu}>
             <div className={styles.login}>
               {isLogin === true ? (
                 <>
                   <button onClick={logOut}>로그아웃</button>
-                  <Link to={"/myPage"}>마이페이지</Link>
+                  <Link to={'/myPage'}>마이페이지</Link>
                 </>
               ) : (
-                <Link to={"/login"}>로그인</Link>
+                <Link to={'/login'}>로그인</Link>
               )}
             </div>
           </div>

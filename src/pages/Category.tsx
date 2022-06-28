@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react";
-import styles from "../assets/css/Category.module.css";
-import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import { RePrice } from "../util/RePrice";
-import { IBrands, IProductInfos } from "../util/db";
+import React, { useEffect, useState } from 'react';
+import styles from '../assets/css/Category.module.css';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { RePrice } from '../util/RePrice';
+import { IBrands, IProductInfos } from '../util/db';
 
 const Category = () => {
   const { category } = useParams();
   const [brands, setBrands] = useState<IBrands>();
   const [products, setProducts] = useState<IProductInfos>([]);
-  const [nowBrand, setNowBrand] = useState("all");
+  const [nowBrand, setNowBrand] = useState('all');
 
   const getAllBrands = () => {
     axios
-      .get("http://3.39.198.214:8080/brands")
-      .then((res) => {
+      .get('http://3.39.198.214:8080/brands')
+      .then(res => {
         setBrands(res.data.brands);
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(error => {
+        console.log('error', error);
       });
   };
 
   const getProducts = () => {
     axios
-      .get("http://3.39.198.214:8080/products")
-      .then((res) => {
+      .get('http://3.39.198.214:8080/products')
+      .then(res => {
         setProducts(res.data.products);
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(error => {
+        console.log('error', error);
       });
   };
 
-  const changeBrand = (brand:string) => {
+  const changeBrand = (brand: string) => {
     setNowBrand(brand);
   };
 
@@ -52,8 +52,8 @@ const Category = () => {
             <div className={styles.menu}>
               <Link
                 to={`/category/${category}/all`}
-                className={`${nowBrand === "all" ? styles.active : ""}`}
-                onClick={() => changeBrand("all")}
+                className={`${nowBrand === 'all' ? styles.active : ''}`}
+                onClick={() => changeBrand('all')}
               >
                 - &nbsp;전체
               </Link>
@@ -63,7 +63,7 @@ const Category = () => {
                     <Link
                       key={index}
                       className={`${
-                        nowBrand === data.name ? styles.active : ""
+                        nowBrand === data.name ? styles.active : ''
                       }`}
                       to={`/category/${category}/${data.name}`}
                       onClick={() => changeBrand(data.name)}
@@ -77,7 +77,7 @@ const Category = () => {
           <div className={styles.content_box}>
             {products &&
               products.map((data, index) => {
-                if (nowBrand === "all") {
+                if (nowBrand === 'all') {
                   return (
                     <div className={styles.product_item} key={data.id}>
                       {data.category.name === category ? (
@@ -108,7 +108,7 @@ const Category = () => {
                           </div>
                         </Link>
                       ) : (
-                        ""
+                        ''
                       )}
                     </div>
                   );
@@ -144,7 +144,7 @@ const Category = () => {
                           </div>
                         </Link>
                       ) : (
-                        ""
+                        ''
                       )}
                     </div>
                   );
